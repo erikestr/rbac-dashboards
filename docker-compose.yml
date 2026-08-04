@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  # ==========================================
+  # Database: PostgreSQL 16
+  # ==========================================
+  postgres:
+    image: postgres:16-alpine
+    container_name: rbac-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ==========================================
+  # Email Testing: MailHog
+  # ==========================================
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    container_name: rbac-mailhog
+    restart: unless-stopped
+    ports:
+      # SMTP server port (Spring Boot sends emails here)
+      - "${MAIL_PORT:-1025}:1025"
+      # Web UI port (View sent emails in your browser)
+      - "${MAILHOG_UI_PORT:-8025}:8025"
+
+volumes:
+  postgres_data:
+    driver: local
