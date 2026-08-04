@@ -1,0 +1,90 @@
+# ==========================================
+# Environment & Secrets (CRITICAL)
+# ==========================================
+# Block actual secret/env files, but keep .env.example tracked
+.env
+.env.local
+.env.*.local
+*.env
+! .env.example
+
+# Local credentials & keys
+*.pem
+*.key
+*.p12
+*.jks
+
+
+# ==========================================
+# Backend: Spring Boot & Maven
+# ==========================================
+# Maven build directory
+backend/target/
+
+# Local database runtime data (if persisted outside Docker)
+*.db
+*.sqlite
+
+# Compiled class files & logs
+*.class
+*.log
+backend/logs/
+
+# Spring Boot local config overlays (if using local profiles)
+backend/src/main/resources/application-local.yml
+backend/src/main/resources/application-local.properties
+
+
+# ==========================================
+# Frontend: Vite + React (Node.js)
+# ==========================================
+# Dependencies
+frontend/node_modules/
+frontend/.pnp/
+frontend/.pnp.js
+
+# Build output
+frontend/dist/
+frontend/build/
+
+# Caches & Test Coverage
+frontend/.vite/
+frontend/.eslintcache
+frontend/coverage/
+
+# Package manager logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# ==========================================
+# Docker & System Outputs
+# ==========================================
+# Docker / local volume mounts
+.docker/
+
+
+# ==========================================
+# IDEs, Editors & OS Files
+# ==========================================
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# VS Code (ignore workspace settings, keep launch configs if desired)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+ehthumbs.db
+Thumbs.db
