@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS test_health_check (
+    id BIGSERIAL PRIMARY KEY,
+    status VARCHAR(50) NOT NULL
+);
